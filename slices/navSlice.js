@@ -8,7 +8,13 @@ const initialState = {
       },
       description: 'Ville du cuivre'
     },
-    destination: null,
+    destination: {
+      location: {
+        lat: -11.664722,
+        long: 27.409444,
+      },
+      description: 'Destination'
+    },
     travelTimeInformation: null
 }
 

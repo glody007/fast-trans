@@ -8,6 +8,7 @@ import React from 'react'
 import NavOptions from '../components/NavOptions'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { GOOGLE_MAPS_APIKEY } from '@env'
+import NavFavorites from '../components/NavFavorites'
 
 export default function HomeScreen() {
   return (
@@ -49,6 +50,8 @@ export default function HomeScreen() {
             />
 
             <NavOptions />
+
+            <NavFavorites />
         </View>
     </SafeAreaView>
   )

@@ -17,15 +17,19 @@ const favorites = [
     }
 ]
 
-export default function NavFavorites() {
+export default function NavFavorites({ onPress }) {
   return (
     <FlatList 
         className="mt-4"
         data={favorites}
+        ItemSeparatorComponent={() => (
+            <View className="bg-gray-200" style={{ height: 0.5}} />
+        )}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
             <TouchableOpacity
-                className="flex-row items-center mt-4 space-x-4"
+                onPress={() => (onPress && onPress(item))}
+                className="flex-row items-center my-4 space-x-4"
             >
                 <View className="bg-gray-200 rounded-full p-3">
                     <Icon 

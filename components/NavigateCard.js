@@ -2,7 +2,11 @@ import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { GOOGLE_MAPS_APIKEY } from '@env'
+import NavFavorites from './NavFavorites'
+import { useNavigation } from '@react-navigation/native'
 export default function NavigateCard() {
+  const navigation = useNavigation()
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <Text className="text-center text-lg font-bold mt-4">Choose your destination</Text>
@@ -10,7 +14,7 @@ export default function NavigateCard() {
         placeholder='where to?'
         styles={{
             container: {
-                flex: 1,
+                flex: 0,
                 paddingTop: 20,
                 backgroundColor: 'white'
             },
@@ -36,6 +40,11 @@ export default function NavigateCard() {
         nearbyPlacesAPI='GooglePlacesSearch'
         debounce={400}
       />
+      <View className="mx-4 flex-1">
+        <NavFavorites onPress={(item) => {
+            navigation.navigate('RideOptionsCard')
+        }} />
+      </View>
     </SafeAreaView>
   )
 }

@@ -9,6 +9,8 @@ import {
 import React, { useState } from 'react'
 import { Icon } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { selectTravelTimeInformation } from '../slices/navSlice'
 
 const data = [
     {
@@ -31,9 +33,12 @@ const data = [
     },
 ]
 
+const SURGE_CHARGE_RATE = 1.6
+
 export default function RideOptionsCard() {
     const navigation = useNavigation()
     const [selected, setSelected] = useState(null)
+    const travelTimeInformations = useSelector(selectTravelTimeInformation)
 
     return (
         <SafeAreaView className="flex-1 bg-white">
@@ -51,7 +56,7 @@ export default function RideOptionsCard() {
                 </TouchableOpacity>
             </View>
 
-            <Text className="text-lg font-bold text-center mt-4">Select a ride</Text>
+            <Text className="text-lg font-bold text-center mt-4">Select a ride - {travelTimeInformations?.distance} Km</Text>
 
             <FlatList 
                 data={data}
@@ -73,9 +78,16 @@ export default function RideOptionsCard() {
                         />
                         <View className="-ml-10">
                             <Text className="text-xl font-semibold">{item.title}</Text>
-                            <Text>Travel time...</Text>
+                            <Text>{travelTimeInformations.duration} mins Travel time</Text>
                         </View>
-                        <Text className="text-xl">${item.id}</Text>
+                        <Text className="text-xl">
+                            {new Intl.NumberFormat('en-us', {
+                                style: 'currency',
+                                currency: 'USD'
+                            }).format(
+                                (travelTimeInformations?.duration * SURGE_CHARGE_RATE * item.multiplier) / 10
+                            )}
+                        </Text>
                     </TouchableOpacity>
                 )}
                 className="mt-4"

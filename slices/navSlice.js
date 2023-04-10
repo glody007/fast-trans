@@ -15,7 +15,10 @@ const initialState = {
       },
       description: 'Destination'
     },
-    travelTimeInformation: null
+    travelTimeInformation: {
+      duration: 34,
+      distance: 9.4
+    }
 }
 
 export const navSlice = createSlice({
